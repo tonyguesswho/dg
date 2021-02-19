@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
+
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_l#4f7vrrvsy)e0qkczpx75p94&_7&8ifdxhoz^xy&utp&d^f#'
+# SECRET_KEY = '_l#4f7vrrvsy)e0qkczpx75p94&_7&8ifdxhoz^xy&utp&d^f#'
+
+SECRET_KEY = os.getenv("SECRET_KEY", '_l#4f7vrrvsy)e0qkczpx75p94&_7&8ifdxhoz^xy&utp&d^f#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -131,10 +137,6 @@ GRAPHENE = {
     ],
 }
 
-GRAPHQL_JWT = {
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
-
-}
 AUTHENTICATION_BACKENDS = [
     'graphql_jwt.backends.JSONWebTokenBackend',
     'django.contrib.auth.backends.ModelBackend',

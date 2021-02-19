@@ -48,7 +48,6 @@ class Query(graphene.ObjectType):
 
     def resolve_me(self, info):
         user = info.context.user
-        if not user.is_authenticated:
-            raise Exception('Authentication credentials were not provided')
-
+        if user.is_anonymous:
+            raise Exception('Authentication Failure: Your must be signed in')
         return user
